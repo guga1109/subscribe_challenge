@@ -1,34 +1,32 @@
 require_relative "product"
+require_relative "order"
 
-products = []
-
-while true
-	inpt = STDIN.gets.chomp
-
-	if inpt == 'q'
-		break
-	end
-
-	quantity = inpt[0, inpt.index(' ')]
-	price = inpt[inpt.rindex(' ') + 1, inpt.length-1]
-	product = inpt[inpt.index(' ') + 1, inpt.rindex(' ') - 1]
+def getProductByInput(input)
+	quantity = input[0, input.index(' ')]
+	price = input[input.rindex(' ') + 1, input.length-1]
+	product = input[input.index(' ') + 1, input.rindex(' ') - 1]
 	product.slice! " at "
 
 	p = Product.new(product, price, quantity)
-	products.push(p)
 end
 
-products.each do |product|
-	puts product.getOrderDescription
+def showOrderReceipt(order)
+	order.getOrderDescription
+
+	puts 'Sales Taxes: %.2f' % order.getTotalOrderTaxValue
+	puts 'Total: %.2f' % order.getTotalOrderValue
 end
 
-totalSaleTaxValue = 0
-totalSaleValue = 0
+order = Order.new
 
-for product in products
-	totalSaleTaxValue += product.getTotalTaxValue
-	totalSaleValue += product.getTotalPrice
+while true
+	input = STDIN.gets.chomp
+
+	if input == 'q'
+		break
+	end
+
+	order.addNewProduct(getProductByInput(input))
 end
 
-puts 'Sales Taxes: %.2f' % totalSaleTaxValue
-puts 'Total: %.2f' % totalSaleValue
+showOrderReceipt(order)

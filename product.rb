@@ -5,7 +5,7 @@ class Product
     @quantity = quantity.strip
   end
 
-	def getOrderDescription
+	def getProductSaleDescription
 		"#{@quantity} #{@description}: %.2f" % getFinalPrice
 	end  
 
