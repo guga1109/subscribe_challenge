@@ -28,7 +28,7 @@ The input should be in the following format:
 
 Example:
 ```
-1 chocolate bar 3.50
+1 chocolate bar at 3.50
 ```
 
 Type 'q' to break the loop.
