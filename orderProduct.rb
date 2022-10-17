@@ -5,7 +5,7 @@ class OrderProduct
 	end
 
 	def getProductOrderDescription
-        "#{@quantity} #{@product.getProductDescription}: %.2f" % getProductOrderTotalValue
+        	"#{@quantity} #{@product.getProductDescription}: %.2f" % getProductOrderTotalValue
 	end
 
 	def getProductOrderTotalValue
