@@ -1,19 +1,19 @@
 class Order
-	@products
+	@orderProducts
 
 	def initialize
-		@products = Array.new
+		@orderProducts = Array.new
 	end
 
 	def addNewProduct(product)
-		@products.push(product)
+		@orderProducts.push(product)
 	end
 
 	def getTotalOrderValue
 		totalOrderValue = 0
 
-		for product in @products
-			totalOrderValue += product.getTotalPrice
+		for product in @orderProducts
+			totalOrderValue += product.getProductOrderTotalValue
 		end
 
 		totalOrderValue
@@ -22,16 +22,16 @@ class Order
 	def getTotalOrderTaxValue
 		totalOrderTaxValue = 0
 
-		for product in @products
-			totalOrderTaxValue += product.getTotalTaxValue
+		for product in @orderProducts
+			totalOrderTaxValue += product.getProductOrderTotalTaxValue
 		end
 
 		totalOrderTaxValue.ceil(2)
 	end
 
 	def getOrderDescription
-		@products.each do |product|
-			puts product.getProductSaleDescription
+		@orderProducts.each do |product|
+			puts product.getProductOrderDescription
 		end
 	end
 end

@@ -1,13 +1,15 @@
 require_relative "product"
 require_relative "order"
+require_relative "orderProduct"
 
-def getProductByInput(input)
+def getOrderProductByInput(input)
 	quantity = input[0, input.index(' ')]
 	price = input[input.rindex(' ') + 1, input.length-1]
-	product = input[input.index(' ') + 1, input.rindex(' ') - 1]
-	product.slice! " at "
+	productDescription = input[input.index(' ') + 1, input.rindex(' ') - 1]
+	productDescription.slice! " at "
 
-	p = Product.new(product, price, quantity)
+	product = Product.new(productDescription, price)
+	orderProduct = OrderProduct.new(product, quantity.to_i)
 end
 
 def showOrderReceipt(order)
@@ -26,7 +28,7 @@ while true
 		break
 	end
 
-	order.addNewProduct(getProductByInput(input))
+	order.addNewProduct(getOrderProductByInput(input))
 end
 
 showOrderReceipt(order)
